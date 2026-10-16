@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="my">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Full AI StoryMotion Studio</title>
+<style>
+:root{--bg:#0b1020;--panel:#131b31;--panel2:#192440;--line:#2a385a;--text:#edf2ff;--muted:#a9b6d4;--accent:#8b7cff;--mint:#35d9bd;--bad:#ff8585}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1b2851,#0b1020 60%);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans Myanmar",sans-serif}header{max-width:1280px;margin:auto;padding:24px 18px 12px}h1{font-size:clamp(25px,4vw,38px);margin:0 0 8px}p{line-height:1.6}header p,.muted,.hint{color:var(--muted)}main{max-width:1280px;margin:auto;padding:10px 18px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.panel{min-width:0;background:#131b31ed;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 12px 35px #0002}.full{grid-column:1/-1}h2{font-size:18px;margin:0 0 14px}label{display:block;color:var(--muted);font-size:13px;margin:12px 0 6px}input,textarea,select{width:100%;padding:11px;border:1px solid var(--line);background:#0d1529;color:var(--text);border-radius:10px;font:inherit}textarea{min-height:100px;resize:vertical;line-height:1.6}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}button{border:0;border-radius:10px;padding:11px 14px;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;margin:8px 6px 0 0}button.secondary{background:#2a3859}button.mint{background:#138b7b}button:disabled{opacity:.5;cursor:not-allowed}.hint{font-size:12px;line-height:1.6}.status{white-space:pre-wrap;background:#0d1529;border:1px solid var(--line);border-radius:10px;padding:11px;margin-top:12px;font-size:13px}.scene{display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}.scene img{width:140px;height:94px;object-fit:cover;background:#0a0f1c;border-radius:9px}.scene h3{font-size:15px;margin:0 0 6px}.scene p{font-size:13px;color:var(--muted);margin:0 0 8px;white-space:pre-wrap}.scene button{font-size:12px;padding:8px 10px}.controlgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.controlgrid label{margin-top:8px}.checkrow{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;margin-top:10px}.checkrow input{width:auto}.scene textarea{min-height:70px;font-size:13px}.scene-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.scene-controls label{margin:0;font-size:11px}.scene-controls select{padding:7px;font-size:12px}.layer-input{font-size:11px!important;padding:6px!important}.scene img{cursor:pointer}canvas{display:block;width:100%;aspect-ratio:var(--canvas-ratio,16/9);background:#060914;border:1px solid var(--line);border-radius:12px}.pill{display:inline-block;padding:4px 9px;border-radius:999px;background:#263355;color:#d5dcff;font-size:11px;margin:3px}.toprow{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.toprow h2{margin:0}.notice{padding:10px 12px;border-radius:10px;background:#292342;border:1px solid #51447c;font-size:12px;line-height:1.6;margin-top:12px}a{color:#bdb3ff}@media(max-width:780px){main{grid-template-columns:1fr}.full{grid-column:auto}.row{grid-template-columns:1fr}.scene{grid-template-columns:95px minmax(0,1fr)}.scene img{width:95px;height:78px}}
+main>section:not(#promptMovie){display:none!important}.movie-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.movie-scene{border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0;background:#0d1529}.movie-scene video{width:100%;max-height:280px;background:#05070c;border-radius:8px}.movie-scene .scene-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.movie-scene textarea{min-height:65px}.movie-actions{display:flex;gap:8px;flex-wrap:wrap}.movie-actions button{margin:4px 4px 4px 0}.progress{height:8px;border-radius:99px;background:#263355;overflow:hidden;margin-top:12px}.progress>div{height:100%;width:0;background:var(--mint);transition:width .2s}@media(max-width:780px){.movie-grid,.movie-scene .scene-fields{grid-template-columns:1fr}}
+/* Flow-inspired workspace: original UI, not a copy of Google's branding */
+:root{--bg:#0a0b0d;--panel:#131518;--panel2:#1c1f23;--line:#30343a;--text:#f3f4f6;--muted:#a7adb5;--accent:#d6e5ff;--mint:#c3f36b}
+body{background:#0a0b0d;color:var(--text)}header{max-width:1500px;padding:20px 22px 10px}header h1{font-size:26px;font-weight:650;letter-spacing:-.5px}header p{margin:5px 0 10px}main{max-width:1500px;display:block;padding:12px 22px 50px}main>section:not(#promptMovie){display:none!important}#promptMovie{background:#111315;border-color:#2a2d31;border-radius:20px;padding:18px;box-shadow:none}.flow-workspace{display:grid;grid-template-columns:230px minmax(0,1fr) 280px;gap:14px;align-items:start}.flow-rail,.flow-inspector,.flow-center{min-width:0;background:#17191c;border:1px solid #2a2d31;border-radius:16px;padding:14px}.flow-rail h3,.flow-inspector h3{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#a9afb7;margin:2px 0 12px}.flow-rail .rail-btn{display:block;width:100%;text-align:left;background:transparent;color:#e9ebee;border:1px solid transparent;padding:10px;margin:3px 0}.flow-rail .rail-btn.active,.flow-rail .rail-btn:hover{background:#272a2f;border-color:#3b4048}.flow-center{background:#0f1012}.flow-center h2{font-size:19px}.flow-prompt{background:#1a1c20;border:1px solid #3b4048;border-radius:16px;padding:14px}.flow-prompt textarea{background:#111315;border-color:#3b4048;min-height:130px}.flow-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.flow-controls label{margin:8px 0 5px}.flow-controls select{background:#111315}.flow-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.flow-actions button{margin:0;border-radius:999px}.flow-actions .mint{background:#d6e5ff;color:#101317}.flow-actions .secondary{background:#2a2d31}.asset-drop{border:1px dashed #4b515a;border-radius:12px;padding:12px;background:#111315}.asset-drop input{font-size:12px}.asset-preview{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.asset-thumb{border:1px solid #34383e;border-radius:10px;padding:6px;min-width:0}.asset-thumb img{width:100%;height:95px;object-fit:cover;border-radius:6px;background:#0a0b0d}.asset-thumb small{display:block;color:#a7adb5;overflow-wrap:anywhere}.flow-preview{border:1px solid #30343a;border-radius:14px;background:#050607;min-height:180px;display:flex;align-items:center;justify-content:center;margin:10px 0;padding:8px}.flow-preview video{max-width:100%;max-height:420px;border-radius:10px}.flow-timeline{display:flex;gap:8px;overflow-x:auto;padding:10px 2px 14px;min-height:110px}.timeline-clip{flex:0 0 132px;background:#1a1c20;border:1px solid #383d44;border-radius:10px;padding:7px;cursor:default}.timeline-clip img,.timeline-clip video{display:block;width:100%;height:68px;object-fit:cover;border-radius:6px;background:#070809}.timeline-clip strong{font-size:11px;display:block;margin:5px 0}.timeline-clip button{font-size:10px;padding:5px 7px;margin:3px 2px 0 0;background:#30343a;color:#f3f4f6}.timeline-clip.active{border-color:#d6e5ff}.movie-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.movie-scene{background:#17191c;border-color:#30343a}.movie-scene video{max-height:240px}.status{background:#101214;border-color:#30343a}.notice{background:#201f1b;border-color:#494437}.pill{background:#292d32;color:#e3e7ec}button{background:#d6e5ff;color:#101317}a{color:#d6e5ff}
+@media(max-width:1100px){.flow-workspace{grid-template-columns:190px minmax(0,1fr)}.flow-inspector{grid-column:1/-1}.asset-preview{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:700px){header{padding:16px 14px 8px}main{padding:8px 10px 30px}#promptMovie{padding:10px}.flow-workspace{grid-template-columns:1fr}.flow-rail{order:2}.flow-center{order:1}.flow-inspector{order:3;grid-column:auto}.flow-controls,.movie-grid{grid-template-columns:1fr 1fr}.asset-preview{grid-template-columns:1fr 1fr}.flow-rail .rail-btn{display:inline-block;width:auto}.flow-preview video{max-height:260px}}
+</style>
+</head>
+<body>
+<header>
+<h1>🎬 Full AI StoryMotion Studio</h1>
+<p>Flow-inspired AI filmmaking workspace — ကိုယ်ပိုင် Prompt၊ Reference Assets၊ Camera Controls နဲ့ Scene Timeline ကိုသုံးပြီး AI Movie တည်ဆောက်ပါ။</p>
+<span class="pill">Prompt-to-Movie</span><span class="pill">AI Video Clips</span><span class="pill">Ingredients / Frames</span><span class="pill">Scene Builder</span><span class="pill">MP4 Export</span>
+</header>
+<main>
+<section class="panel full" id="promptMovie">
+ <div class="flow-workspace">
+  <aside class="flow-rail">
+   <h3>Project</h3>
+   <button class="rail-btn active" type="button" data-rail="prompt">✦ Prompt Studio</button>
+   <button class="rail-btn" type="button" data-rail="assets">▧ Ingredients / Assets</button>
+   <button class="rail-btn" type="button" data-rail="timeline">▤ Scene Builder</button>
+   <div style="height:1px;background:#30343a;margin:14px 0"></div>
+   <h3>Project settings</h3>
+   <label for="movieLength">Movie Target</label><select id="movieLength"><option value="1">၁ မိနစ် · ~10 clips</option><option value="3">၃ မိနစ် · ~30 clips</option><option value="5" selected>၅ မိနစ် · ~50 clips</option></select>
+   <label for="movieRatio">Aspect Ratio</label><select id="movieRatio"><option value="16:9">16:9 · Landscape</option><option value="9:16">9:16 · Portrait</option><option value="1:1">1:1 · Square</option></select>
+   <p class="hint">Clip တစ်ခု ~6 sec ခန့်။ Video API က paid ဖြစ်နိုင်သည်။ အရင် Preview ထုတ်ပါ။</p>
+  </aside>
+  <div class="flow-center">
+   <div class="toprow"><h2>Prompt Studio</h2><span class="pill">Original prompt · No story rewrite</span></div>
+   <p class="hint">မင်းရေးတဲ့ prompt ကို ဇာတ်လမ်းအသစ်ပြန်ရေးမထားဘဲ Video Model ဆီပို့မယ်။ Shot/camera instruction ကိုသာ clip အလိုက် ထပ်ပေါင်းနိုင်ပါတယ်။</p>
+   <div class="flow-prompt">
+    <label for="moviePromptText">သင့် Movie Prompt (မူရင်းအတိုင်း)</label>
+    <textarea id="moviePromptText" placeholder="ဇာတ်ကောင်၊ ဝတ်စုံ၊ နေရာ၊ ဖြစ်ရပ်၊ ရုပ်ရှင်ပုံစံ၊ လှုပ်ရှားမှုနဲ့ dialogue ကို ကိုယ်တိုင်ရေးပါ…" style="min-height:150px"></textarea>
+    <div class="flow-actions"><button id="previewMovieBtn">▶ Preview clip</button><button id="generateMovieBtn" class="mint">✦ Generate movie clips</button><button id="assembleMovieBtn" class="secondary" disabled>Export MP4</button></div>
+   </div>
+   <div class="progress"><div id="movieProgress"></div></div>
+   <div class="status" id="movieStatus">စတင်ရန် Prompt ရေးပါ။ Video API မချိတ်ရသေးပါက Render Environment မှာ REPLICATE_API_TOKEN ထည့်ပါ။</div>
+   <div class="toprow" style="margin-top:18px"><h2>Scene Builder · Timeline</h2><span class="pill" id="timelineCount">0 clips</span></div>
+   <div class="flow-timeline" id="movieTimeline"><p class="hint">Preview သို့မဟုတ် Clip generation လုပ်ပြီးနောက် ဒီနေရာမှာ Clip များပေါ်လာပါမယ်။</p></div>
+   <div class="toprow" style="margin-top:10px"><h2>Generated clips</h2><span class="pill">Reorder · Preview · Download</span></div>
+   <div id="movieScenes"></div>
+  </div>
+  <aside class="flow-inspector">
+   <h3>Ingredients / References</h3>
+   <p class="hint">ဇာတ်ကောင်ပုံကို subject reference အဖြစ်၊ ပထမမြင်ကွင်းပုံကို start frame အဖြစ် အသုံးပြုနိုင်ပါတယ်။ ပုံတွေက ဒီ browser session ထဲမှာသာ ထိန်းသိမ်းထားပါတယ်။</p>
+   <div class="asset-drop"><label for="characterReference">Character / Subject reference</label><input id="characterReference" type="file" accept="image/png,image/jpeg,image/webp"><div id="characterReferencePreview" class="asset-preview"></div></div>
+   <div class="asset-drop" style="margin-top:10px"><label for="startFrame">Start frame / Image to video</label><input id="startFrame" type="file" accept="image/png,image/jpeg,image/webp"><div id="startFramePreview" class="asset-preview"></div></div>
+   <div class="asset-drop" style="margin-top:10px"><label for="endFrame">End frame (preview/reference only)</label><input id="endFrame" type="file" accept="image/png,image/jpeg,image/webp"><div id="endFramePreview" class="asset-preview"></div><p class="hint">လက်ရှိ Video Model API က Start Frame ကိုပဲ တိုက်ရိုက်လက်ခံတယ်။ End Frame ကို UI ထဲမှာ reference အဖြစ်သိမ်းထားပြီး generation မှာ မပို့ပါ။</p></div>
+   <label for="cameraMove">Camera direction</label><select id="cameraMove"><option value="none">Prompt အတိုင်း</option><option value="[Pan left]">Pan left</option><option value="[Pan right]">Pan right</option><option value="[Push in]">Push in</option><option value="[Pull out]">Pull out</option><option value="[Tracking shot]">Tracking shot</option><option value="[Static shot]">Static shot</option></select>
+   <div class="notice"><b>Voice:</b> Model က silent clip ထုတ်ပေးနိုင်ပါတယ်။ Dialogue ကို ကိုယ်တိုင်ထည့်ပြီး audio upload/TTS လုပ်နိုင်ပါတယ်။ Character-specific voice cloning မပါဝင်ပါ။</div>
+  </aside>
+ </div>
+</section>
+
+<section class="panel">
+<h2>၁။ ဝတ္ထုဖန်တီးရန်</h2>
+<label for="idea">ဝတ္ထုအကြောင်းအရာ / ဇာတ်လမ်းအိုင်ဒီယာ</label>
+<textarea id="idea" placeholder="ဥပမာ - တောရွာလေးတစ်ရွာမှာ လျှို့ဝှက်စာအုပ်တစ်အုပ်ကို တွေ့သွားတဲ့ မိန်းကလေးတစ်ယောက်အကြောင်း..."></textarea>
+<div class="row">
+<div><label for="genre">အမျိုးအစား</label><select id="genre"><option>Fantasy</option><option>Mystery</option><option>Adventure</option><option>Comedy</option><option>Romance</option><option>Historical</option><option>Horror</option><option>Science Fiction</option></select></div>
+<div><label for="minutes">ဝတ္ထုကြာချိန်</label><select id="minutes"><option value="3">3 မိနစ်</option><option value="5" selected>5 မိနစ်</option><option value="10">10 မိနစ်</option><option value="15">15 မိနစ်</option><option value="30">30 မိနစ်</option></select></div>
+</div>
+<div class="row">
+<div><label for="style">ပုံစံ</label><select id="style"><option>2.5D Cinematic Fantasy</option><option>Anime 2.5D</option><option>Storybook Illustration</option><option>Realistic Cinematic</option><option>Dark Mystery</option></select></div>
+<div><label for="ratio">Video အချိုး</label><select id="ratio"><option value="16:9">16:9 YouTube</option><option value="9:16">9:16 Shorts</option><option value="1:1">1:1 Square</option></select></div>
+</div>
+<button id="storyBtn">✨ AI ဝတ္ထုရေးပြီး Scene ခွဲမည်</button>
+<p class="hint">ဝတ္ထုနဲ့ Scene များကို AI ဖန်တီးပေးမည်။ Scene အရေအတွက်နဲ့ ကြာချိန်သည် ခန့်မှန်းတန်ဖိုးဖြစ်ပြီး narration အရှည်ပေါ် မူတည်နိုင်သည်။</p>
+</section>
+<section class="panel">
+<h2>၂။ Preview & Export</h2>
+<canvas id="canvas" width="1280" height="720"></canvas>
+<div class="row">
+<div><label for="partLength">Export အပိုင်းကြာချိန်</label><select id="partLength"><option value="3">3 မိနစ်စီ</option><option value="4">4 မိနစ်စီ</option><option value="5" selected>5 မိနစ်စီ</option></select></div>
+<div><label for="voice">မြန်မာ AI Voice</label><select id="voice"><option value="female">Google မြန်မာအသံ (အခမဲ့)</option></select></div>
+</div>
+<div class="controlgrid">
+<div><label for="motionMode">2.5D Camera Motion</label><select id="motionMode"><option value="kenburns">Ken Burns (cinematic)</option><option value="push">Slow push-in</option><option value="pull">Slow pull-out</option><option value="panleft">Pan left</option><option value="panright">Pan right</option><option value="drift">Floating drift</option><option value="parallax">Depth parallax simulation</option></select></div>
+<div><label for="motionStrength">Motion Strength</label><select id="motionStrength"><option value="0.04">Gentle</option><option value="0.08" selected>Balanced</option><option value="0.13">Dynamic</option></select></div>
+</div>
+<label class="checkrow"><input type="checkbox" id="showTitle" checked> Video ထဲတွင် ခေါင်းစဉ်ပြမည်</label>
+<label class="checkrow"><input type="checkbox" id="showNarration" checked> မြန်မာစာတန်း (narration subtitle) ပြမည်</label>
+<label for="selectedPart">ထုတ်မည့် Part</label><select id="selectedPart"><option value="0">Scene ဖန်တီးပြီးမှ ရွေးနိုင်ပါမည်</option></select>
+<button class="mint" id="assetsBtn" disabled>🖼️ ပုံများနှင့် အသံများ ဖန်တီးမည်</button>
+<button id="exportBtn" disabled>🎞️ ရွေးထားသော Part ကို Video ထုတ်မည်</button>
+<button class="secondary" id="jsonBtn" disabled>Storyboard JSON သိမ်းမည်</button>
+<div id="status" class="status">အဆင်သင့်ဖြစ်ပါပြီ။ AI API များအတွက် Render Environment တွင် Gemini နှင့် Cloudflare Key များ ထည့်ထားရပါမည်။</div>
+<div class="notice">မြန်မာအသံအတွက် Google Translate TTS (my) ကို API Key မလိုဘဲ အသုံးပြုထားသည်။ ပိုမိုသဘာဝကျတဲ့ အသံကို စမ်းကြည့်ရန် <a href="https://huggingface.co/spaces/freococo/F5-Myanmar-TTS-Demo" target="_blank" rel="noopener">F5 Myanmar TTS Demo</a> သို့မဟုတ် <a href="https://huggingface.co/freococo/MyanmarTTS" target="_blank" rel="noopener">MyanmarTTS Model</a> ကို ဖွင့်နိုင်သည်။ Demo site ကို ဒီ app ထဲ အလိုအလျောက် API ချိတ်ထားခြင်း မဟုတ်ပါ။ ၎င်းသည် unofficial endpoint ဖြစ်သောကြောင့် တစ်ခါတစ်ရံ rate limit သို့မဟုတ် service ပြတ်တောက်မှု ဖြစ်နိုင်သည်။ အသံအရည်အသွေးနှင့် အမျိုးသား/အမျိုးသမီးအသံရွေးချယ်မှုမှာ Azure Neural Voice ထက် ကန့်သတ်ချက်ရှိနိုင်သည်။</div>
+</section>
+<section class="panel full">
+<div class="toprow"><h2>၃။ Scene & Asset Manager</h2><span class="pill" id="count">0 scenes</span></div>
+<div id="storyText" class="muted"></div>
+<div id="scenes"><p class="hint">အိုင်ဒီယာထည့်ပြီး AI ဝတ္ထုရေးပါ။</p></div>
+</section>
+<section class="panel full">
+<h2>အလုပ်လုပ်ပုံနှင့် လိုအပ်ချက်များ</h2>
+<p class="hint">2.5D controls: Ken Burns, push/pull, pan, floating drift; Scene တစ်ခုချင်း camera motion ရွေးနိုင်သည်။ Narration duration အလိုက် timing/part များကိုတွက်ချက်ပြီး WebM export လုပ်သည်။ Scene တစ်ခုချင်းစီတွင် transparent foreground/background layer PNG များကို ထည့်နိုင်ပြီး layer များကို အနက်အလိုက် camera offset မတူအောင် ရွှေ့ပေးသည်။ Layer မထည့်ထားလျှင် still-image simulation ကို သုံးသည်။</p>
+</section>
+</main>
+<script>
+'use strict';
+// Runtime diagnostics: expose client-side failures in the visible status area.
+window.addEventListener('error', function (event) {
+  const message = 'App JavaScript error: ' + (event.message || 'unknown error') + (event.lineno ? ' (line ' + event.lineno + ')' : '');
+  console.error(message, event.error || '');
+  const statusNode = document.getElementById('movieStatus') || document.getElementById('status');
+  if (statusNode) statusNode.textContent = message + ' — Screenshot ရိုက်ပြီး developer ကိုပို့ပါ။';
+});
+window.addEventListener('unhandledrejection', function (event) {
+  const reason = event.reason && event.reason.message ? event.reason.message : String(event.reason || 'unknown rejection');
+  const message = 'App async error: ' + reason;
+  console.error(message);
+  const statusNode = document.getElementById('movieStatus') || document.getElementById('status');
+  if (statusNode) statusNode.textContent = message + ' — Screenshot ရိုက်ပြီး developer ကိုပို့ပါ။';
+});
+const $=id=>document.getElementById(id);
+const state={story:null,scenes:[],busy:false};
+const canvas=$('canvas'),ctx=canvas.getContext('2d');
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+function status(s){$('status').textContent=s}
+async function api(url,body){
+ const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+ const data=await r.json().catch(()=>({error:'Server response ကို ဖတ်မရပါ။'}));
+ if(!r.ok)throw new Error(data.error||`Request failed (${r.status})`);
+ return data;
+}
+function sceneDuration(s){return Math.max(1,Number(s?.durationSeconds)||8)}
+function makeParts(){
+ const target=Number($('partLength').value)*60,parts=[];let start=0,duration=0;
+ for(let i=0;i<state.scenes.length;i++){
+  const d=sceneDuration(state.scenes[i]);
+  if(i>start && duration+d>target){parts.push({start,end:i,index:parts.length,duration});start=i;duration=0}
+  duration+=d;
+ }
+ if(start<state.scenes.length)parts.push({start,end:state.scenes.length,index:parts.length,duration});
+ return parts;
+}
+function selectedPart(){return makeParts()[Number($('selectedPart').value)]||null}
+function refreshParts(
